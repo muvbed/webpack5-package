@@ -6,6 +6,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 	devServer: {
 		contentBase: baseWebpackConfig.externals.paths.dist,
 		port: 3000,
+		open: true,
 		overlay: true
 	}
 })

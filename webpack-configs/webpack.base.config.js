@@ -1,27 +1,49 @@
-const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+const path = require('path')
+const fs = require('fs')
+
 const PATHS = {
 	src: path.join(__dirname, '../src'),
 	dist: path.join(__dirname, '../dist'),
-	assets: 'assets/'
+	assets: 'assets'
+}
+
+const ENTRIES_DIR = `${PATHS.src}/js`
+const PAGES_DIR = `${PATHS.src}/layouts`
+
+const ENTRIES_FILES = fs.readdirSync(ENTRIES_DIR).filter(fileName => fileName.endsWith('.js'))
+const PAGES_FILES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.html'))
+
+const ENTRIES = {}
+
+for (let item of ENTRIES_FILES) {
+	ENTRIES[item.replace(/\.js/, '')] = `${ENTRIES_DIR}/${item}`
 }
 
 module.exports = {
 	externals: {
 		paths: PATHS
 	},
-	entry: {
-		app: PATHS.src
-	},
+	entry: ENTRIES,
 	output: {
-		filename: 'js/[name].[hash].js',
-		path: PATHS.dist,
-		publicPath: ''
+		filename: 'js/[name].js',
+		path: PATHS.dist
+	},
+	optimization: {
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					name: 'vendors',
+					test: /node_modules/,
+					chunks: 'all'
+				}
+			}
+		}
 	},
 	module: {
 		rules: [{
@@ -39,14 +61,23 @@ module.exports = {
 				}
 			}
 		}, {
-			test: /\.(png|jpg|gif|svg)$/,
+			test: /\.(png|jp(e)?g|gif|svg)$/,
 			use: {
 				loader: 'file-loader',
 				options: {
 					name: '[name].[ext]',
 					publicPath: '../img',
-					outputPath: 'img',
-					esModule: false
+					outputPath: 'img'
+				}
+			}
+		}, {
+			test: /\.(ttf|woff(2)?)$/,
+			use: {
+				loader: 'file-loader',
+				options: {
+					name: '[name].[ext]',
+					publicPath: '../fonts',
+					outputPath: 'fonts'
 				}
 			}
 		}, {
@@ -60,32 +91,36 @@ module.exports = {
 	resolve: {
 		alias: {
 			'@': PATHS.src,
-			'vue$': 'vue/dist/vue.js'
+			'vue': 'vue/dist/vue.js'
 		}
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
 		new VueLoaderPlugin(),
 		new MiniCssExtractPlugin({
-			filename: 'css/[name].[hash].css'
+			filename: 'css/[name].css'
 		}),
 		new CopyWebpackPlugin({
 			patterns: [
 				{
-					from: `${PATHS.src}/${PATHS.assets}img`,
-					to: 'img'
+					from: `${PATHS.src}/${PATHS.assets}/img`,
+					to: 'img/[name].[ext]'
+				},
+				{
+					from: `${PATHS.src}/${PATHS.assets}/fonts`,
+					to: 'fonts/[name].[ext]'
 				},
 				{
 					from: `${PATHS.src}/static`,
-					to: ''
+					to: '[name].[ext]'
 				}
 			]
 		}),
-		new HtmlWebpackPlugin({
-			hash: false,
+		...PAGES_FILES.map(page => new HtmlWebpackPlugin({
+			template: `${PAGES_DIR}/${page}`,
+			filename: `./${page}`,
 			minify: false,
-			template: `${PATHS.src}/index.html`,
-			filename: './index.html'
-		})
+			inject: false
+		}))
 	]
 }
