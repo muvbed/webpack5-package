@@ -34,17 +34,6 @@ module.exports = {
 		filename: 'js/[name].js',
 		path: PATHS.dist
 	},
-	optimization: {
-		splitChunks: {
-			cacheGroups: {
-				vendor: {
-					name: 'vendors',
-					test: /node_modules/,
-					chunks: 'all'
-				}
-			}
-		}
-	},
 	module: {
 		rules: [{
 			test: /\.js$/,
