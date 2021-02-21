@@ -5,10 +5,15 @@ import Vue from 'vue'
 import router from '@/vue/router/first'
 import store from '@/vue/store/first'
 
-Vue.component('first', require('@/vue/pages/first/index.vue').default)
+const First = Vue.component('first', require('@/vue/pages/first/index.vue').default)
+const Second = Vue.component('first', require('@/vue/pages/second/index.vue').default)
 
-new Vue({
+new First({
 	router,
 	store,
 	el: '#app'
+})
+
+new Second({
+	el: '#app1'
 })

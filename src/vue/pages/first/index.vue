@@ -10,14 +10,13 @@
 import Module from '@/vue/components/Module.vue'
 
 export default {
-	name: 'first',
 	components: {
 		Module
 	}
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .vue-page {
 	&__title {
 		color: rgb(0,100,0);
