@@ -1,10 +1,10 @@
-@import './helpers/normalize';
-@import './helpers/fonts.scss';
-@import './helpers/general.scss';
+@import "./helpers/normalize";
+@import "./helpers/fonts.scss";
+@import "./helpers/general.scss";
 
 .bg {
-	width: 400px;
-	height: 400px;
-	margin: 0 auto;
-	background: url('../img/webpack-logo.png') no-repeat center /cover;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  background: url("@/assets/img/webpack-logo.png") no-repeat center / cover;
 }

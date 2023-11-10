@@ -1,3 +1,3 @@
 module.exports = {
-	plugins: ['autoprefixer', 'css-mqpacker', 'cssnano']
-}
+  plugins: ["autoprefixer", "css-mqpacker", "cssnano"],
+};

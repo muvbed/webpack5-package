@@ -1,1 +1,1 @@
-console.log('JS module')
+console.log("JS module");

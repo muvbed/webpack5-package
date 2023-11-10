@@ -1,19 +1,18 @@
-import '@/assets/scss/first.scss'
+import "@/assets/scss/first.scss";
 
-import Vue from 'vue'
+import { createApp } from "vue";
 
-import router from '@/vue/router/first'
-import store from '@/vue/store/first'
+import First from "@/vue/pages/first/index.vue";
+import Second from "@/vue/pages/second/index.vue";
 
-const First = Vue.component('first', require('@/vue/pages/first/index.vue').default)
-const Second = Vue.component('first', require('@/vue/pages/second/index.vue').default)
+import router from "@/vue/router/first";
+import store from "@/vue/store/first";
 
-new First({
-	router,
-	store,
-	el: '#app'
-})
+const FirstApp = createApp(First);
+const SecondApp = createApp(Second);
 
-new Second({
-	el: '#app1'
-})
+FirstApp.use(router);
+FirstApp.use(store);
+
+FirstApp.mount("#first-app");
+SecondApp.mount("#second-app");

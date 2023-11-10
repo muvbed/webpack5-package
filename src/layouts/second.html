@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/second.css">
-	<title>webpack4-package. Second page</title>
-</head>
-<body>
-	<div class="wrapper">
-		<h1 class="title">webpack4-package</h1>
-		<a href="index.html" class="link">to first page</a>
-		<img src="img/js-logo.png" class="picture" alt="">
-	</div>
-	<script src="js/second.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/second.css" />
+    <title>webpack5-package. Second page</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1 class="title">webpack5-package (by Muvbed)</h1>
+      <a href="index.html" class="link">to first page</a>
+      <img class="picture" alt="JS logo"
+      src=<%=require("@/assets/img/js-logo.png")%> />
+    </div>
+    <script src="js/second.js"></script>
+  </body>
 </html>

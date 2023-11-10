@@ -1,2 +1,2 @@
-import '@/js/modules/module'
-import '@/assets/scss/second.scss'
+import "@/js/modules/module";
+import "@/assets/scss/second.scss";

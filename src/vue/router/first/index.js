@@ -1,14 +1,16 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
-Vue.use(VueRouter)
+const routes = [
+  {
+    path: "/",
+    component: () => import("@/vue/pages/second/index.vue"),
+  },
+];
 
-export default new VueRouter({
-	mode: 'hash',
-	routes: [
-		{
-			path: '/', 
-			component: () => import('@/vue/pages/second/index.vue')
-		}
-	]
-})
+const router = createRouter({
+  mode: "hash",
+  history: createWebHistory(),
+  routes,
+});
+
+export default router;

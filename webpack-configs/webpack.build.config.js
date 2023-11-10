@@ -1,10 +1,10 @@
-const { merge } = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.config')
-
+const path = require("path");
+const { merge } = require("webpack-merge");
+const baseWebpackConfig = require(path.join(__dirname, "webpack.base.config"));
 const buildWebpackConfig = merge(baseWebpackConfig, {
-	mode: 'production'
-})
+  mode: "production",
+});
 
 module.exports = new Promise((resolve) => {
-	resolve(buildWebpackConfig)
-})
+  resolve(buildWebpackConfig);
+});
