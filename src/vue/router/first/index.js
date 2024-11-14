@@ -1,9 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+const example = () => import("@/vue/pages/first/example.vue");
+const about = () => import("@/vue/pages/first/about.vue");
+
 const routes = [
   {
     path: "/",
-    component: () => import("@/vue/pages/second/index.vue"),
+    component: example,
+  },
+  {
+    path: "/about",
+    component: about,
   },
 ];
 
